@@ -1,0 +1,76 @@
+{% extends "cte/layout.html" %}
+
+{% load static %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <table style="width: 100%;">
+            <tr style="width:100%;">
+              <td style="width:50%;">
+                <h5>Work-Experience Opportunity Postings</h5>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                  <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Program Type</th>
+                  <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Application Deadline</th>
+                  <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Program Dates</th>
+                  <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Application Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for job in jobs %}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">{{ job.title }}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="align-middle text-center">
+                    <p class="text-xs text-secondary mb-0 font-weight-bold">{{ job.type }}</p>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold">{{ job.application_deadline }}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold">{{ job.start_date }} to {{ job.end_date }}</span>
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    {% if job.quick_apply %}
+                      <span class="badge badge-sm bg-gradient-success">Quick Apply</span>
+                    {% else %}
+                      <span class="badge badge-sm bg-gradient-secondary">Third Party System</span>
+                    {% endif %}
+                  </td>
+                  <td class="align-middle">
+                    <a href="/job/{{ job.id }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="View Profile">
+                      View Details
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

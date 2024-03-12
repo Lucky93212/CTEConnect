@@ -1,0 +1,130 @@
+{% extends "cte/layout.html" %}
+
+{% load static %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <table style="width: 100%;">
+            <tr style="width:100%;">
+              <td style="width:50%;">
+                <h5>Mentorship Hub</h5>
+              </td>
+              <td style="width:50%;">
+                <a href="/newrequest/"><button style="background-color: #CB0C9F; color: white; margin-left:65%; width:35%;" type="submit" class="btn btn-outline-primary btn-sm mb-0"><b>+ Create New Hours Request</b></button></a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <br>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="row">
+            <div class="col-12" style="width:50%;">
+              <h5 style="margin-left: 1.5rem;">Your Programs</h5>
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                      <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Program Type</th>
+                      <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Program Dates</th>
+                      <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Grantable Hours</th>
+                      <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Application Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for job in jobs %}
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{ job.title }}</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-xs text-secondary mb-0 font-weight-bold">{{ job.type }}</p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ job.start_date }} to {{ job.end_date }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ job.hours }}</span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        {% if job.students.all.count == 0 %}
+                          <span class="badge badge-sm bg-gradient-secondary">Pending Review</span>
+                        {% else %}
+                          {% if student in job.students.all %}
+                            <span class="badge badge-sm bg-gradient-success">Accepted</span>
+                          {% else %}
+                            <span class="badge badge-sm bg-gradient-danger">Rejected</span>
+                          {% endif %}
+                        {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12"  style="width:49%;">
+              <h5 style="margin-left: 1.5rem;">Your Hours Requests</h5>
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                      <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mentorship Date</th>
+                      <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hours Requested</th>
+                      <th class="align-middle text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for request in requests %}
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{ request.program.title }}</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ request.date }}</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">{{ request.hours }}</span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        {% if request.reviewed %}
+                          {% if request.approved %}
+                            <span class="badge badge-sm bg-gradient-success">Approved</span>
+                          {% else %}
+                            <span class="badge badge-sm bg-gradient-danger">Denied</span>
+                          {% endif %}
+                        {% else %}
+                          <span class="badge badge-sm bg-gradient-secondary">Pending Review</span>
+                        {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

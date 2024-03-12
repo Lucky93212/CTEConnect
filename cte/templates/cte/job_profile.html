@@ -1,0 +1,170 @@
+{% extends "cte/layout.html" %}
+
+{% load static %}
+
+{% block title %}Student Profile{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="page-header min-height-100 border-radius-xl mt-4">
+    <span class="mask bg-gradient-primary opacity-6"></span>
+  </div>
+  <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+    <div class="row gx-4">
+      <div class="col-auto my-auto">
+        <div class="h-100">
+          <h5 class="mb-1" style="font-size: medium;">
+            {{ job.title }}
+          </h5>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+          <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
+            <li class="nav-item" style="text-align: right;">
+              {% if not past %}
+                <span class="badge badge-sm bg-gradient-success">Application Open</span>
+              {% else %}
+                <span class="badge badge-sm bg-gradient-secondary">Application Closed</span>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid py-4">
+  <div class="row" style="width:100%;">
+    <div class="col-12 col-xl-4" style="width:50%; margin-bottom:1.5rem;">
+      <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+          <div class="row">
+            <div class="col-md-8 d-flex align-items-center">
+              <h6 class="mb-0">Program Information</h6>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-3">
+          <textarea required rows="20" name="description" class="form-control" style="width:100%; height: fit-content;" readonly>{{ job.description }}</textarea>
+          <hr class="horizontal gray-light my-4">
+          <ul class="list-group">
+            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Program Type:</strong> &nbsp; {{ job.type }}</li>
+            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Grantable Hours:</strong> &nbsp; {{ job.hours }}</li>
+            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Program Dates:</strong> &nbsp; {{ job.start_date }} to {{ job.end_date }}</li>
+            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Application Deadline:</strong> &nbsp; {{ job.application_deadline }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% if user_type == "Student" %}
+    <div class="col-12 col-xl-4" style="width:50%; margin-bottom:1.5rem;">
+      <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+          <div class="row">
+            <div class="col-md-8 d-flex align-items-center">
+              <h6 class="mb-0">Apply</h6>
+            </div>
+            <br><br>
+            {% if job.quick_apply %}
+              <p style="font-size: small;">The following application supports Quick Apply. Quick Apply allows you to immediately send your profile
+                to be reviewed for this program. No supplementary materials necessary! <b>Review your details below before applying!</b>
+              </p>
+            {% else %}
+              <p style="font-size: small;">The following application supports requires you to submit your application through a third Party
+              application system. <b>Your profile is still viewable by application reviewers</b>. Remember to also indicate you're applying by <b>clicking the button below!</b>
+              Review your details below before applying!
+              </p>
+            {% endif %}
+          </div>
+          <b>Third party application:</b><a href="{{ job.application_link }}"><p>{{ job.application_link }}</p></a>
+        </div>
+        <div class="card-body p-3">
+          <b>Student Information:</b>
+          <p class="text-sm" id="bio">
+            {{ student.information }}
+          </p>
+          <ul class="list-group">
+            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; {{ student.user.first_name }} {{ student.user.last_name }}</li>
+            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; {{ student.user.email }}</li>
+            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Desired Career Major:</strong> &nbsp; {{ student.major }}</li>
+            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Total Mentorship Hours:</strong> &nbsp; {{ student.hours }}</li>
+            <li class="list-group-item border-0 ps-0 pb-0">
+              <strong class="text-dark text-sm">Resume Status:</strong>
+                {% if student.resume == "cte/static/cte/resumes/ucdoiowebqicndsup.pdf" %}
+                  <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm bg-gradient-secondary">Not Uploaded</span>
+                  </td>
+                {% else %}
+                  <td class="align-middle text-center text-sm">
+                    <a href="{{ student.resume }}"><span class="badge badge-sm bg-gradient-success">Uploaded</span> <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i> PDF</button></a>
+                  </td>
+                {% endif %}
+            </li>
+          </ul>
+          <br>
+          <a href="/student_profile/{{ student.id }}"><button style="width:100%;" type="button" class="btn btn-outline-primary btn-sm mb-0">Change Details</button></a>
+          <br><br>
+          <a href="/apply/{{ job.id }}"><button style="background-color: #CB0C9F; color: white; width:100%;" class="btn btn-outline-primary btn-sm mb-0"><b>Apply</b></button></a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if user_type == "Owner" %}
+    <div class="col-12 col-xl-4" style="width:50%; margin-bottom:1.5rem;">
+      <div class="card h-100">
+        <div class="card-header pb-0 p-3">
+          <h6 class="mb-0">Applicant Overview</h6>
+          <p>Select applicants to be approved for the program.</p>
+        </div>
+        <div class="card-body p-3">
+          <form method="post" action="/approve/{{ job.id }}/">
+            {% csrf_token %}
+            <button id="approve" type="submit" style="background-color: #CB0C9F; color: white; width:40%; display:none;" class="btn btn-outline-primary btn-sm mb-0"><b>Approve Applicants</b></button>
+            <br>
+            <ul class="list-group">
+              <div class="scroll">
+                {% for applicant in applicants %}
+                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                  <input name="applicant-{{ applicant.id }}" value="approve" type="checkbox" onchange="approvebutton()">
+                  <div class="d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm">&nbsp;&nbsp;&nbsp;{{ applicant.user.first_name }} {{ applicant.user.last_name }}</h6>
+                    <p class="mb-0 text-xs">&nbsp;&nbsp;&nbsp;&nbsp;{{ applicant.grad_year }}</p>
+                  </div>
+                  <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/student_profile/{{ applicant.user.id }}">View Profile</a>
+                </li>
+                {% endfor %}
+              </div>
+            </ul>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+<style>
+  div.scroll {
+      margin: 4px, 4px;
+      padding: 4px;
+      width: 100%;
+      height: 700px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      text-align: justify;
+  }
+</style>
+
+<script>
+  function approvebutton() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+    if (checkedOne) {
+      document.getElementById("approve").style.display = "block";
+    } else {
+      document.getElementById("approve").style.display = "none";
+    }
+  }
+</script>
+
+{% endblock %}

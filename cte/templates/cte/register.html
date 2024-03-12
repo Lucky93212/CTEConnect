@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static 'cte/admin_assets/img/apple-icon.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'cte/logo.png' %}">
+  <title>
+    CTEConnect - Student Registration
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="{% static 'cte/admin_assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+  <link href="{% static 'cte/admin_assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="{% static 'cte/admin_assets/css/nucleo-svg.css' %}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="{% static 'cte/admin_assets/css/soft-ui-dashboard.css' %}" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+</head>
+
+<body class="">
+  <main class="main-content  mt-0">
+    <section class="min-vh-100 mb-8">
+      <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('/static/cte/admin_assets/img/curved-images/curved14.jpg');">
+        <span class="mask bg-gradient-dark opacity-6"></span>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 text-center mx-auto">
+              <a style="width:100%;" href="/"><img style="width:100%;" src="{% static 'cte/white_long.png' %}"></a>
+              <h1 class="text-white mb-2 mt-5">Welcome!</h1>
+              <p class="text-lead text-white">If you have a join code from your school's CTE Coordinator,
+                you can fill out the form below to get registered with your school and explore new opportunities.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row mt-lg-n10 mt-md-n11 mt-n10">
+          <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+            <div class="card z-index-0">
+              <div class="card-header text-center pt-4">
+                <h5>Register</h5>
+              </div>
+              <div class="card-body">
+                <form role="form text-left" action="/student_register/" method="POST">
+                  {% csrf_token %}
+                  <div class="row" style="width:100%; margin-left: auto; margin-right: auto;">
+                    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" style="width:50%;">
+                      <input required name="first_name" type="text" class="form-control" placeholder="First Name" aria-label="fname" aria-describedby="fname-addon">
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" style="width:50%;">
+                      <input required name="last_name" type="text" class="form-control" placeholder="Last Name" aria-label="lname" aria-describedby="lname-addon">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="mb-3">
+                    <input required name="email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                  </div>
+                  <div class="mb-3">
+                    <input required name="username" type="text" class="form-control" placeholder="Username" aria-label="username" aria-describedby="username-addon">
+                  </div>
+                  <div class="mb-3">
+                    <input required name="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                  </div>
+                  <div class="row" style="width:100%; margin-left: auto; margin-right: auto;">
+                    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" style="width:50%;">
+                      <input required name="zip" type="text" class="form-control" placeholder="School Zip Code" aria-label="Zip" aria-describedby="zip-addon">
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4" style="width:50%;">
+                      <input required name="code" type="text" class="form-control" placeholder="Join Code" aria-label="Join Code" aria-describedby="code-addon">
+                    </div>
+                  </div>
+                  <div class="mb-3" style="margin-top: 10px;">
+                    <label for="grad_year">Graduation Year</label>
+                    <select id="grad_year" required name="grad_year" class="form-select" aria-label="Default select example">
+                      <option value="Class of 2024">Class of 2024</option>
+                      <option value="Class of 2025">Class of 2025</option>
+                      <option value="Class of 2026">Class of 2026</option>
+                      <option value="Class of 2027">Class of 2027</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="major">Career Major Interest</label>
+                    <select id="major" required name="major" class="form-select" aria-label="Default select example">
+                      <option value='Agribusiness Systems'>Agribusiness Systems</option>
+                      <option value='Agricultural Power, Structural and Technical Systems'>Agricultural Power, Structural and Technical Systems</option>
+                      <option value='Agriculture'>Agriculture</option>
+                      <option value='Aircraft Technology.'>Aircraft Technology.</option>
+                      <option value='Animal Services'>Animal Services</option>
+                      <option value='Apparel and Textile Management'>Apparel and Textile Management</option>
+                      <option value='Apparel and Textile Production'>Apparel and Textile Production</option>
+                      <option value='Apparel and Textile Services'>Apparel and Textile Services</option>
+                      <option value='Appliance Repair'>Appliance Repair</option>
+                      <option value='Audio Technology.'>Audio Technology.</option>
+                      <option value='Audio/Visual Broadcast Production Technology.'>Audio/Visual Broadcast Production Technology.</option>
+                      <option value='Automotive Technology.'>Automotive Technology.</option>
+                      <option value='Baking'>Baking</option>
+                      <option value='Brick and Stone Masonry/Tilesetting'>Brick and Stone Masonry/Tilesetting</option>
+                      <option value='Building Maintenance'>Building Maintenance</option>
+                      <option value='Business: Accounting'>Business: Accounting</option>
+                      <option value='Business: Comprehensive Business'>Business: Comprehensive Business</option>
+                      <option value='Business: Computer Applications and Business-Related Information Technology'>Business: Computer Applications and Business-Related Information Technology</option>
+                      <option value='Business: Finance/Economics/Law'>Business: Finance/Economics/Law</option>
+                      <option value='Business: Keyboarding/Data Entry'>Business: Keyboarding/Data Entry</option>
+                      <option value='Business: Office Administration/Office Systems Technology'>Business: Office Administration/Office Systems Technology</option>
+                      <option value='Cabinet Making/Millwork'>Cabinet Making/Millwork</option>
+                      <option value='Carpentry.'>Carpentry.</option>
+                      <option value='Chemical Technology.'>Chemical Technology.</option>
+                      <option value='Collision Repair Technology.'>Collision Repair Technology.</option>
+                      <option value='Commercial Photography.'>Commercial Photography.</option>
+                      <option value='Computer Integrated Manufacturing Systems'>Computer Integrated Manufacturing Systems</option>
+                      <option value='Computer Science Technology'>Computer Science Technology</option>
+                      <option value='Construction Technology.'>Construction Technology.</option>
+                      <option value='Cosmetology/Hair Styling'>Cosmetology/Hair Styling</option>
+                      <option value='Culinary Arts'>Culinary Arts</option>
+                      <option value='Dental Assisting'>Dental Assisting</option>
+                      <option value='Dental Office Management'>Dental Office Management</option>
+                      <option value='Desktop Publishing'>Desktop Publishing</option>
+                      <option value='Diesel Mechanics'>Diesel Mechanics</option>
+                      <option value='Drafting and Design Technology.'>Drafting and Design Technology</option>
+                      <option value='Electrical Trades'>Electrical Trades</option>
+                      <option value='Electronics Technology.'>Electronics Technology</option>
+                      <option value='Electronics Trades'>Electronics Trades</option>
+                      <option value='Emergency Medical Technicians'>Emergency Medical Technicians</option>
+                      <option value='Engineering Technology.'>Engineering Technology</option>
+                      <option value='Environmental Service Systems'>Environmental Service Systems</option>
+                      <option value='Family and Consumer Sciences'>Family and Consumer Sciences</option>
+                      <option value='Family and Consumer Sciences: Apparel, Textiles, and Interiors'>Family and Consumer Sciences: Apparel, Textiles, and Interiors</option>
+                      <option value='Family and Consumer Sciences: Child and Family Development'>Family and Consumer Sciences: Child and Family Development</option>
+                      <option value='Family and Consumer Sciences: Foods/Nutrition and Food Science'>Family and Consumer Sciences: Foods/Nutrition and Food Science</option>
+                      <option value='Fire Science'>Fire Science</option>
+                      <option value='Food Management/Marketing'>Food Management/Marketing</option>
+                      <option value='Food Market Careers'>Food Market Careers</option>
+                      <option value='Food Processing and Technology.'>Food Processing and Technology.</option>
+                      <option value='General Health Sciences'>General Health Sciences</option>
+                      <option value='Graphic Design'>Graphic Design</option>
+                      <option value='Greenhouse Management'>Greenhouse Management</option>
+                      <option value='Health Fitness'>Health Fitness</option>
+                      <option value='Health Occupations'>Health Occupations</option>
+                      <option value='Heating, Ventilation, Air Conditioning and Refrigeration'>Heating, Ventilation, Air Conditioning and Refrigeration</option>
+                      <option value='Heating, Ventilation, Air Conditioning and Refrigeration'>Heating, Ventilation, Air Conditioning and Refrigeration</option>
+                      <option value='Heavy Duty Equipment Technology.'>Heavy Duty Equipment Technology.</option>
+                      <option value='Horticulture'>Horticulture</option>
+                      <option value='Hospitality and Tourism Management'>Hospitality and Tourism Management</option>
+                      <option value='Human Development and Child Care Services'>Human Development and Child Care Services</option>
+                      <option value='Interactive Media'>Interactive Media</option>
+                      <option value='Landscaping & Grounds Keeping'>Landscaping & Grounds Keeping</option>
+                      <option value='Law Enforcement'>Law Enforcement</option>
+                      <option value='Legal Assisting'>Legal Assisting</option>
+                      <option value='Machine Shop'>Machine Shop</option>
+                      <option value='Marine Sciences'>Marine Sciences</option>
+                      <option value='Marine Trades Technology.'>Marine Trades Technology.</option>
+                      <option value='Marketing'>Marketing</option>
+                      <option value='Medical Assisting'>Medical Assisting</option>
+                      <option value='Medical Laboratory Technicians'>Medical Laboratory Technicians</option>
+                      <option value='Medical Office Management'>Medical Office Management</option>
+                      <option value='Medical Records Technology.'>Medical Records Technology.</option>
+                      <option value='Natural Resources Systems'>Natural Resources Systems</option>
+                      <option value='Nursery Management'>Nursery Management</option>
+                      <option value='Nursing Assistants'>Nursing Assistants</option>
+                      <option value='Office Machine Repair'>Office Machine Repair</option>
+                      <option value='Optical Technicians'>Optical Technicians</option>
+                      <option value='Plumbing and Pipefitting'>Plumbing and Pipefitting</option>
+                      <option value='Sheet Metal'>Sheet Metal</option>
+                      <option value='Small Engine Technology.'>Small Engine Technology.</option>
+                      <option value='Stationary Engineering'>Stationary Engineering</option>
+                      <option value='Televison Broadcasting'>Televison Broadcasting</option>
+                      <option value='Transportation, Distribution, and Logistics'>Transportation, Distribution, and Logistics</option>
+                      <option value='Travel and Tourism'>Travel and Tourism</option>
+                      <option value='Upholstering'>Upholstering</option>
+                      <option value='Veterinary Technicians'>Veterinary Technicians</option>
+                      <option value='Visual Arts'>Visual Arts</option>
+                      <option value='Vocational Arts/Dance'>Vocational Arts/Dance</option>
+                      <option value='Vocational Arts/Electronic Music'>Vocational Arts/Electronic Music</option>
+                      <option value='Vocational Arts/Instrumental Music'>Vocational Arts/Instrumental Music</option>
+                      <option value='Vocational Arts/Theater'>Vocational Arts/Theater</option>
+                      <option value='Vocational Arts/Vocal Music'>Vocational Arts/Vocal Music</option>
+                    </select>
+                  </div>
+                  <div class="form-check form-check-info text-left">
+                    <input required class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      I agree the <a href="/terms/" class="text-dark font-weight-bolder">Terms and Conditions</a>
+                    </label>
+                  </div>
+                  {% if error_message %}
+                    <p style="color: red">{{ error_message }}</p>
+                  {% endif %}
+                  <div class="text-center">
+                    <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+                  </div>
+                  <p class="text-sm mt-3 mb-0">Already have an account? <a href="/login/" class="text-dark font-weight-bolder">Sign in</a></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-8 mx-auto text-center mt-1">
+          <p class="mb-0 text-secondary">
+            Copyright © <script>
+              document.write(new Date().getFullYear())
+            </script> Lakshya Chauhan. All Rights Reserved.<br><b>Made In America.</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+  <!--   Core JS Files   -->
+  <script src="{% static 'cte/admin_assets/js/core/popper.min.js' %}"></script>
+  <script src="{% static 'cte/admin_assets/js/core/bootstrap.min.js' %}"></script>
+  <script src="{% static 'cte/admin_assets/js/plugins/perfect-scrollbar.min.js' %}"></script>
+  <script src="{% static 'cte/admin_assets/js/plugins/smooth-scrollbar.min.js' %}"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="{% static 'cte/admin_assets/js/soft-ui-dashboard.min.js' %}"></script>
+</body>
+
+</html>

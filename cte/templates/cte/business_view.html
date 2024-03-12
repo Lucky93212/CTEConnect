@@ -1,0 +1,103 @@
+{% extends "cte/layout.html" %}
+
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-lg-8" style="width:100%;">
+      <div class="row">
+        <div class="col-md-12 mb-lg-0 mb-4">
+          <div class="card mt-4">
+            <div class="card-header pb-0 p-3">
+              <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                  <h6 class="mb-0" style="font-size: 40px;"><b>{{ business.name }}</b></h6>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-3">
+                <div class="row">
+                  <div class="col-md-6" style="width:33%;">
+                    <div class="card">
+                      <div class="card-header mx-4 p-3 text-center">
+                        <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
+                          <i class="fas fa-landmark opacity-10"></i>
+                        </div>
+                      </div>
+                      <div class="card-body pt-0 p-3 text-center">
+                        <h6 class="text-center mb-0">Mentorship Hours</h6>
+                        <span class="text-xs">Lifetime Total</span>
+                        <hr class="horizontal dark my-3">
+                        <h5 class="mb-0">{{ total_hours }} hours</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mt-md-0 mt-4" style="width:33%;">
+                    <div class="card">
+                      <div class="card-header mx-4 p-3 text-center">
+                        <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
+                          <i class="fab fa-paypal opacity-10"></i>
+                        </div>
+                      </div>
+                      <div class="card-body pt-0 p-3 text-center">
+                        <h6 class="text-center mb-0">Students</h6>
+                        <span class="text-xs">Current and Former Total</span>
+                        <hr class="horizontal darks my-3">
+                        <h5 class="mb-0">{{ total_students }} students</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mt-md-0 mt-4" style="width:33%;">
+                    <div class="card">
+                      <div class="card-header mx-4 p-3 text-center">
+                        <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
+                          <i class="fab fa-paypal opacity-10"></i>
+                        </div>
+                      </div>
+                      <div class="card-body pt-0 p-3 text-center">
+                        <h6 class="text-center mb-0">Programs</h6>
+                        <span class="text-xs">Ongoing Program Count</span>
+                        <hr class="horizontal dark my-3">
+                        <h5 class="mb-0">{{ programs }} programs</h5>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 mb-xl-0 mb-4" style="margin-top: 2%; width:40%; margin-left: 10%;"> 
+              <a href="/jobs/">
+                <div class="card bg-transparent shadow-xl">
+                  <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('\static\cte\admin_assets\img\curved-images\curved14.jpg');">
+                    <span class="mask bg-gradient-success"></span>
+                    <div class="card-body position-relative z-index-1 p-3" style="height:60px;">
+                      <h5 class="text-white mt-4 mb-5 pb-2" style="text-align: center;"><b><i>Application Review Module</i></b></h5>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          <div class="col-xl-6 mb-xl-0 mb-4" style="margin-top: 2%; width:40%;">
+            <a href="/workvalidation/">
+            <div class="card bg-transparent shadow-xl">
+              <div class="overflow-hidden position-relative border-radius-xl" style="background-image: url('../assets/img/curved-images/curved13.jpg');">
+                <span class="mask bg-gradient-danger"></span>
+                <div class="card-body position-relative z-index-1 p-3" style="height:60px;">
+                  <h5 class="text-white mt-4 mb-5 pb-2" style="text-align: center;"><b><i>Work Validation Module</i></b></h5>
+                </div>
+              </div>
+            </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
